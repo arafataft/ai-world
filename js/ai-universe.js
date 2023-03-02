@@ -25,7 +25,7 @@ const displayCard=(data)=>{
                 <small class="text-muted"><i class="fa-solid fa-calendar-days"></i>  ${element.published_in}</small>
             </div>
             <div>
-            <button class="btn btn-info" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"><i class="fa-solid fa-circle-info"></i></button>
+            <button class="btn btn-info" onclick="aiTools('${element.id}')" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"><i class="fa-solid fa-circle-info"></i></button>
             </div>
           </div>
         </div>
@@ -33,3 +33,20 @@ const displayCard=(data)=>{
         `;
     });
 }
+
+
+
+
+const aiTools=id=>{
+    const url=`https://openapi.programming-hero.com/api/ai/tool/${id}`
+    fetch(url)
+    .then((res)=>res.json())
+    .then((data) => {
+        console.log(data.data);
+});
+}
+
+const showAiDetails=(aiDetail)=>{
+    
+}
+
