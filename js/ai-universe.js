@@ -19,9 +19,14 @@ const displayCard=(data)=>{
             <p class="card-text muted">
             3. ${element.features[2]}</p>
           </div>
-          <div class="card-footer">
-            <h5 class="card-title">${element.name}</h5>
-            <small class="text-muted"><i class="fa-solid fa-calendar-days"></i>  ${element.published_in}</small>
+          <div class="card-footer d-flex justify-content-between">
+            <div>
+                <h5 class="card-title">${element.name}</h5>
+                <small class="text-muted"><i class="fa-solid fa-calendar-days"></i>  ${element.published_in}</small>
+            </div>
+            <div>
+            <button class="btn btn-info"><i class="fa-solid fa-circle-info"></i></button>
+            </div>
           </div>
         </div>
       </div>
