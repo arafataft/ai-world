@@ -21,7 +21,7 @@ const displayCard=(data)=>{
           </div>
           <div class="card-footer">
             <h5 class="card-title">${element.name}</h5>
-            <small class="text-muted">${element.published_in}</small>
+            <small class="text-muted"></small>
           </div>
         </div>
       </div>
