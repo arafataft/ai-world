@@ -21,7 +21,7 @@ const displayCard=(data)=>{
           </div>
           <div class="card-footer">
             <h5 class="card-title">${element.name}</h5>
-            <small class="text-muted"></small>
+            <small class="text-muted"><i class="fa-solid fa-calendar-days"></i>  ${element.published_in}</small>
           </div>
         </div>
       </div>
