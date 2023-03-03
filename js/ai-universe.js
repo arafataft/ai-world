@@ -23,6 +23,7 @@ seeMoreSeeLess(a);
 
 const sortByDate=data=>{
   document.getElementById('cardContainer').innerHTML='';
+  spinner(true);
   data.sort(function(a,b){
     return Number(new Date(a.published_in)) - Number(new Date(b.published_in));
   });
@@ -39,6 +40,7 @@ const seeMoreSeeLess=data=>{
 
     btnSeeMore.addEventListener("click", () => {
       document.getElementById('cardContainer').innerHTML='';
+      spinner(true);
       displayCard(data);
       btnSeeMore.classList.add("d-none");
       btnSeeLess.classList.remove("d-none");
@@ -46,6 +48,7 @@ const seeMoreSeeLess=data=>{
 
     btnSeeLess.addEventListener("click", () => {
       document.getElementById('cardContainer').innerHTML='';
+      spinner(true);
       displayCard(data.slice(0,6));
       btnSeeMore.classList.remove("d-none");
       btnSeeLess.classList.add("d-none");
@@ -63,6 +66,7 @@ const seeMoreSeeLess=data=>{
 
 const displayCard=(data)=>{
     const cardContainer=document.getElementById('cardContainer');
+    spinner(false);
     data.forEach(element => {
         cardContainer.innerHTML+=`<div class="col ">
         <div class="card h-100 p-3">
@@ -94,6 +98,18 @@ const displayCard=(data)=>{
 
 
 
+const spinner=isLoading=>{
+  const spinnerLoading=document.getElementById("spinner");
+  if(isLoading)
+  {
+    spinnerLoading.classList.remove('d-none');
+  }
+  else{
+    spinnerLoading.classList.add('d-none');
+  }
+}
+
+
 
 
 const aiTools=id=>{
@@ -107,6 +123,7 @@ const aiTools=id=>{
 
 const showAiDetails=(aiDetail)=>{
     const aiCardDetails=document.getElementById("aiCardDetails");
+    const accuracy=document.getElementById("accuracy");
     aiCardDetails.innerHTML+=`
     <div class="modal-header">
     <button onclick="aiCardDetails.innerHTML=''" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -164,7 +181,7 @@ const showAiDetails=(aiDetail)=>{
         <div class="card my-5 me-5 p-4 border rounded">
             <div class="containerNew">
                 <img src="${aiDetail.image_link[0]}" class="card-img-top" alt="...">
-                <p class="top-right rounded p-2 bg-danger bg-opacity-75">${aiDetail.accuracy.score*100}% accuracy</p>
+                <p id="accuracy" class="top-right rounded p-2 bg-danger bg-opacity-75">${aiDetail.accuracy.score?aiDetail.accuracy.score*100:''} ${aiDetail.accuracy.score?'% accurary':''}</p>
             </div>
             
             <div class="card-body ">
