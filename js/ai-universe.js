@@ -1,26 +1,52 @@
 const btnSeeMore=document.getElementById("btnSeeMore");
 const btnSeeLess=document.getElementById("btnSeeLess");
+const btnSortaByDate=document.getElementById("btnSortaByDate");
+
 
 
 
 fetch("https://openapi.programming-hero.com/api/ai/tools")
 .then((res)=>res.json())
 .then((data) => {
-  if((data.data.tools.length)>6){
-    displayCard(data.data.tools.slice(0,6));
+
+const a=data.data.tools;
+
+seeMoreSeeLess(a);
+
+  btnSortaByDate.addEventListener("click", () => {
+    sortByDate(a);
+})
+
+
+  
+});
+
+const sortByDate=data=>{
+  document.getElementById('cardContainer').innerHTML='';
+  data.sort(function(a,b){
+    return Number(new Date(a.published_in)) - Number(new Date(b.published_in));
+  });
+  seeMoreSeeLess(data);
+}
+
+
+
+const seeMoreSeeLess=data=>{
+  if((data.length)>6){
+    displayCard(data.slice(0,6));
     btnSeeMore.classList.remove("d-none");
     btnSeeLess.classList.add("d-none");
 
     btnSeeMore.addEventListener("click", () => {
       document.getElementById('cardContainer').innerHTML='';
-      displayCard(data.data.tools);
+      displayCard(data);
       btnSeeMore.classList.add("d-none");
       btnSeeLess.classList.remove("d-none");
   })
 
     btnSeeLess.addEventListener("click", () => {
       document.getElementById('cardContainer').innerHTML='';
-      displayCard(data.data.tools.slice(0,6));
+      displayCard(data.slice(0,6));
       btnSeeMore.classList.remove("d-none");
       btnSeeLess.classList.add("d-none");
   })
@@ -31,7 +57,7 @@ fetch("https://openapi.programming-hero.com/api/ai/tools")
     btnSeeMore.classList.add("d-none");
     btnSeeLess.classList.add("d-none");
   }
-});
+}
 
 
 
