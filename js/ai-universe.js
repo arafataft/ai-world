@@ -1,8 +1,39 @@
+const btnSeeMore=document.getElementById("btnSeeMore");
+const btnSeeLess=document.getElementById("btnSeeLess");
+
+
+
 fetch("https://openapi.programming-hero.com/api/ai/tools")
 .then((res)=>res.json())
 .then((data) => {
+  if((data.data.tools.length)>6){
+    displayCard(data.data.tools.slice(0,6));
+    btnSeeMore.classList.remove("d-none");
+    btnSeeLess.classList.add("d-none");
+
+    btnSeeMore.addEventListener("click", () => {
+      document.getElementById('cardContainer').innerHTML='';
+      displayCard(data.data.tools);
+      btnSeeMore.classList.add("d-none");
+      btnSeeLess.classList.remove("d-none");
+  })
+
+    btnSeeLess.addEventListener("click", () => {
+      document.getElementById('cardContainer').innerHTML='';
+      displayCard(data.data.tools.slice(0,6));
+      btnSeeMore.classList.remove("d-none");
+      btnSeeLess.classList.add("d-none");
+  })
+
+  }
+  else{
     displayCard(data.data.tools);
+    btnSeeMore.classList.add("d-none");
+    btnSeeLess.classList.add("d-none");
+  }
 });
+
+
 
 const displayCard=(data)=>{
     const cardContainer=document.getElementById('cardContainer');
